@@ -1,21 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-// Datos de ejemplo para las ciudades
-const cities = [
-  { name: "New York", image: "/api/placeholder/300/200" },
-  { name: "Paris", image: "/api/placeholder/300/200" },
-  { name: "Tokyo", image: "/api/placeholder/300/200" },
-  { name: "London", image: "/api/placeholder/300/200" },
-  { name: "Rome", image: "/api/placeholder/300/200" },
-  { name: "Sydney", image: "/api/placeholder/300/200" },
-  { name: "Barcelona", image: "/api/placeholder/300/200" },
-  { name: "Dubai", image: "/api/placeholder/300/200" },
-  { name: "Rio de Janeiro", image: "/api/placeholder/300/200" },
-  { name: "Amsterdam", image: "/api/placeholder/300/200" },
-  { name: "Prague", image: "/api/placeholder/300/200" },
-  { name: "San Francisco", image: "/api/placeholder/300/200" }
-];
+import cities from '/public/images';
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
