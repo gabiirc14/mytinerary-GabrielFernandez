@@ -36,8 +36,6 @@ const Header = () => {
             <ul className="space-y-4">
               <li><Link to="/" className="block hover:text-gray-300 text-lg" onClick={toggleMenu}>Home</Link></li>
               <li><Link to="/cities" className="block hover:text-gray-300 text-lg" onClick={toggleMenu}>Cities</Link></li>
-              <li><Link to="#" className="block hover:text-gray-300 text-lg" onClick={toggleMenu}>About</Link></li>
-              <li><Link to="#" className="block hover:text-gray-300 text-lg" onClick={toggleMenu}>Contact</Link></li>
             </ul>
           </nav>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from '../components/Carousel';
 import Hero from '../components/Hero';
-import CallToAction from '../components/CallToAction';
+
 
 
 function HomePage() {
@@ -9,8 +9,6 @@ function HomePage() {
       <div>
         <Hero />
         <Carousel />
-        <CallToAction />
-
       </div>
     );
   }
