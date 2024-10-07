@@ -69,7 +69,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
+      
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
           <p>&copy; {new Date().getFullYear()} MyTinerary. All rights reserved.</p>
         </div>

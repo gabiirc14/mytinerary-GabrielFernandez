@@ -12,7 +12,6 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <img src="/api/placeholder/50/50" alt="Logo" className="w-8 h-8 mr-2" />
             <span className="text-xl font-bold">MyTinerary</span>
           </div>
 
@@ -34,8 +33,8 @@ const Header = () => {
           </button>
           <nav className="mt-8">
             <ul className="space-y-4">
-              <li><Link to="/" className="block hover:text-gray-300 text-lg" onClick={toggleMenu}>Home</Link></li>
-              <li><Link to="/cities" className="block hover:text-gray-300 text-lg" onClick={toggleMenu}>Cities</Link></li>
+              <li><Link to="/" className="block  hover:text-blue-700 text-lg" onClick={toggleMenu}>Home</Link></li>
+              <li><Link to="/cities" className="block  hover:text-blue-700 text-lg" onClick={toggleMenu}>Cities</Link></li>
             </ul>
           </nav>
         </div>
