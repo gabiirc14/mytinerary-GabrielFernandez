@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import cities from '/public/images';
+import { Heart } from 'lucide-react';
+import cities from '/public/Images';
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,7 +10,7 @@ const Carousel = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
-    }, 5000); // Cambia de slide cada 5 segundos
+    }, 8000); // Cambia de slide cada 5 segundos
 
     return () => clearInterval(timer);
   }, [totalSlides]);
@@ -23,7 +24,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="my-12">
+    <div className="my-12 container mx-auto">
       <h2 className="text-3xl font-bold text-center mb-6">Popular MyTineraries</h2>
       <div className="relative overflow-hidden">
         <div 
@@ -34,7 +35,7 @@ const Carousel = () => {
             <div key={slideIndex} className="w-full flex-shrink-0 grid grid-cols-2 md:grid-cols-4 gap-4">
               {cities.slice(slideIndex * 4, (slideIndex + 1) * 4).map((city, cityIndex) => (
                 <div key={cityIndex} className="relative group">
-                  <img src={city.image} alt={city.name} className="w-full h-48 object-cover rounded-lg" />
+                  <img src={city.image} alt={city.name} className="w-full h-64 object-cover rounded-lg" />
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <p className="text-white text-lg font-semibold">{city.name}</p>
                   </div>

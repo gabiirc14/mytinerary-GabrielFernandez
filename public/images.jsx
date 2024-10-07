@@ -11,7 +11,7 @@ const Cities = [
     { name: "Dubai", image: "https://wallpaperaccess.com/full/1162570.jpg" },
     { name: "Rio de Janeiro", image: "https://th.bing.com/th/id/R.f40908d9f9d2d6f16da0f559f8de7966?rik=mPIk9iSJyJasag&pid=ImgRaw&r=0" },
     { name: "Amsterdam", image: "https://th.bing.com/th/id/R.cb5fed0c47177a92660fd755e6dfad00?rik=1d8kRzldMBK7BQ&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f10%2fAmsterdam-city-wide-hd-wallpapers.jpg&ehk=ZVqK6L8VIZQJJYelesagUXlUAdm9J4WXFAM3DPq8CJU%3d&risl=&pid=ImgRaw&r=0" },
-    { name: "Bogota", image: "https://th.bing.com/th/id/R.92d28c13fab3ffbc3c49bdac769307f2?rik=wxYGQkEl2rRG7A&pid=ImgRaw&r=0" },
+    { name: "Bogotá", image: "https://th.bing.com/th/id/R.92d28c13fab3ffbc3c49bdac769307f2?rik=wxYGQkEl2rRG7A&pid=ImgRaw&r=0" },
     { name: "San Francisco", image: "https://images.hdqwalls.com/wallpapers/san-francisco-california-cityscape-4k-qv.jpg" }
   ];
   

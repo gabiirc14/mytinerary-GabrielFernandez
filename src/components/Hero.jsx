@@ -7,10 +7,10 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const cities = [
-    "New York",
-    "Paris",
+    "Buenos Aires",
+    "Bogotá",
     "Tokyo",
-    "London"
+    "London",
   ];
 
   const handleLike = (city) => {
