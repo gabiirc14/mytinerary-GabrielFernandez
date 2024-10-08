@@ -1,31 +1,47 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, User } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, X, User, Heart } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+    // Aquí puedes agregar lógica adicional para manejar el "like"
+  };
+
+  const goToHome = () => {
+    navigate('/');
+    if (isMenuOpen) toggleMenu();
+  };
 
   return (
-    <header className="bg-gray-800 text-white">
+    <header className="bg-gray-800 text-white sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <span className="text-xl font-bold">MyTinerary</span>
+            <span className="text-xl font-bold cursor-pointer" onClick={goToHome}>
+              MyTinerary
+            </span>
           </div>
 
-          {/* Botón de menú */}
-          <div className="flex items-center">
-            <button onClick={toggleMenu} className="text-white mr-4">
+          <div className="flex items-center space-x-4">
+            <button onClick={toggleMenu} className="text-white">
               <Menu size={24} />
             </button>
-            <User size={24} />
+            <div className="flex items-center cursor-pointer" >
+              <User size={24} className="mr-2" />
+              <p className="text-white font-bold">Login</p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Menú deslizable para todas las pantallas */}
+      {/* Menú deslizable */}
       <div
         className={`fixed top-0 left-0 w-64 h-full bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
@@ -40,7 +56,7 @@ const Header = () => {
               <li>
                 <Link
                   to="/"
-                  className="block  hover:text-blue-700 text-lg"
+                  className="block hover:text-blue-500 text-lg transition-colors"
                   onClick={toggleMenu}
                 >
                   Home
@@ -49,7 +65,7 @@ const Header = () => {
               <li>
                 <Link
                   to="/cities"
-                  className="block  hover:text-blue-700 text-lg"
+                  className="block hover:text-blue-500 text-lg transition-colors"
                   onClick={toggleMenu}
                 >
                   Cities
@@ -60,7 +76,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Overlay para cerrar el menú al hacer clic fuera */}
+      {/* Overlay */}
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40"
