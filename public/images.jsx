@@ -1,4 +1,3 @@
-
 const Cities = [
   {
     name: "Buenos Aires",

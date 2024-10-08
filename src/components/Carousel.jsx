@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Heart } from "lucide-react";
 import cities from "/public/Images";
 
 const Carousel = () => {
@@ -59,13 +58,13 @@ const Carousel = () => {
         </div>
         <button
           onClick={prevSlide}
-          className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-all"
+          className="absolute top-1/2 left-1 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-all"
         >
           <ChevronLeft size={24} />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-all"
+          className="absolute top-1/2 right-1 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-all"
         >
           <ChevronRight size={24} />
         </button>

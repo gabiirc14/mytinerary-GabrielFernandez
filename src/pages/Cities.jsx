@@ -1,9 +1,25 @@
 import React from 'react';
 import { Loader } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
+
 
 function Cities() {
+  const navigate = useNavigate();
+const handleHome = () => {
+  navigate("/");
+};
   return (
     <div className="min-h-screen flex flex-col justify-center items-center">
+       <button
+            onClick={handleHome}
+            className="bg-white text-blue-600 font-bold py-2 px-6 rounded-full hover:bg-blue-100 transition duration-300"
+          >
+            Return to home
+          </button>
       <div className="container mx-auto px-4 py-8 max-w-2xl">
         <h1 className="text-4xl font-bold mb-4 text-center">Cities</h1>
         
