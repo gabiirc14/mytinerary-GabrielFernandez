@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Map, Mail, Phone } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Facebook, Twitter, Instagram, Map, Mail, Phone } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -10,11 +10,20 @@ const Footer = () => {
           {/* Información del sitio */}
           <div>
             <h3 className="text-2xl font-bold mb-4">MyTinerary</h3>
-            <p className="mb-4">Find your perfect trip, designed by insiders who know and love their cities!</p>
+            <p className="mb-4">
+              Find your perfect trip, designed by insiders who know and love
+              their cities!
+            </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-blue-400"><Facebook size={20} /></a>
-              <a href="#" className="hover:text-blue-400"><Twitter size={20} /></a>
-              <a href="#" className="hover:text-blue-400"><Instagram size={20} /></a>
+              <a href="#" className="hover:text-blue-400">
+                <Facebook size={20} />
+              </a>
+              <a href="#" className="hover:text-blue-400">
+                <Twitter size={20} />
+              </a>
+              <a href="#" className="hover:text-blue-400">
+                <Instagram size={20} />
+              </a>
             </div>
           </div>
 
@@ -22,11 +31,31 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Explore</h4>
             <ul className="space-y-2">
-              <li><Link to="/" className="hover:text-blue-400">Home</Link></li>
-              <li><Link to="/cities" className="hover:text-blue-400">Cities</Link></li>
-              <li><Link to="/about" className="hover:text-blue-400">About Us</Link></li>
-              <li><Link to="/contact" className="hover:text-blue-400">Contact</Link></li>
-              <li><Link to="/faq" className="hover:text-blue-400">FAQ</Link></li>
+              <li>
+                <Link to="/" className="hover:text-blue-400">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/cities" className="hover:text-blue-400">
+                  Cities
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="hover:text-blue-400">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-blue-400">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link to="/faq" className="hover:text-blue-400">
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -69,9 +98,10 @@ const Footer = () => {
           </div>
         </div>
 
-      
         <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p>&copy; {new Date().getFullYear()} MyTinerary. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} MyTinerary. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

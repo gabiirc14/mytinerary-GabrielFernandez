@@ -1,35 +1,30 @@
-import React, { useState } from 'react';
-import { MapPin, Heart } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { MapPin, Heart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const [likedCities, setLikedCities] = useState({});
   const navigate = useNavigate();
 
-  const cities = [
-    "Buenos Aires",
-    "Bogotá",
-    "Tokyo",
-    "London",
-  ];
+  const cities = ["Buenos Aires", "Bogotá", "Tokyo", "London"];
 
   const handleLike = (city) => {
-    setLikedCities(prev => ({
+    setLikedCities((prev) => ({
       ...prev,
-      [city]: !prev[city]
+      [city]: !prev[city],
     }));
   };
 
   const handleExplore = () => {
-    navigate('/cities');
+    navigate("/cities");
   };
 
   return (
     <div className="relative text-white">
       <div className="absolute inset-0">
-        <img 
-          src="https://wallpaperaccess.com/full/1392569.jpg" 
-          alt="Buenos Aires" 
+        <img
+          src="https://wallpaperaccess.com/full/1392569.jpg"
+          alt="Buenos Aires"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -50,22 +45,29 @@ const Hero = () => {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {cities.map((city) => (
-              <div key={city} className="bg-white bg-opacity-20 backdrop-blur-lg rounded-lg p-4 flex flex-col items-center">
+              <div
+                key={city}
+                className="bg-white bg-opacity-20 backdrop-blur-lg rounded-lg p-4 flex flex-col items-center"
+              >
                 <p className="font-bold mb-2">{city}</p>
-                <button 
+                <button
                   onClick={() => handleLike(city)}
                   className="flex items-center"
                 >
-                  <Heart 
-                    size={20} 
-                    className={`mr-1 ${likedCities[city] ? 'fill-red-500 text-red-500' : 'text-gray-200'}`}
+                  <Heart
+                    size={20}
+                    className={`mr-1 ${
+                      likedCities[city]
+                        ? "fill-red-500 text-red-500"
+                        : "text-gray-200"
+                    }`}
                   />
-                  {likedCities[city] ? 'Liked' : 'Like'}
+                  {likedCities[city] ? "Liked" : "Like"}
                 </button>
               </div>
             ))}
           </div>
-          <button 
+          <button
             onClick={handleExplore}
             className="bg-white text-blue-600 font-bold py-2 px-6 rounded-full hover:bg-blue-100 transition duration-300"
           >
