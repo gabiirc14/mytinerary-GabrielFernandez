@@ -63,7 +63,7 @@ Sprint1/
 
 - `App.jsx`: El componente principal de React que configura el enrutamiento y el diseño global.
 - `main.jsx`: Punto de entrada de la aplicación React.
-- `Images.jsx`: Probablemente contiene importaciones de imágenes o utilidades relacionadas con imágenes.
+- `Images.jsx`: Contiene importaciones de imágenes o utilidades relacionadas con imágenes.
 
 ## 💅 Estilizado
 
