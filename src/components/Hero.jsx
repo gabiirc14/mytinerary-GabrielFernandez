@@ -56,11 +56,10 @@ const Hero = () => {
                 >
                   <Heart
                     size={20}
-                    className={`mr-1 ${
-                      likedCities[city]
+                    className={`mr-1 ${likedCities[city]
                         ? "fill-red-500 text-red-500"
                         : "text-gray-200"
-                    }`}
+                      }`}
                   />
                   {likedCities[city] ? "Liked" : "Like"}
                 </button>

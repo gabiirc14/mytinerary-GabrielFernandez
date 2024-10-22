@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "../../src/App.css";
 
 function BannerCity() {
@@ -12,7 +12,7 @@ function BannerCity() {
     <div className="relative">
       <div className="absolute inset-0 h-[400px] lg:h-[500px]">
         <img
-          src="https://wallpaperaccess.com/full/1392569.jpg"
+          src="https://images.unsplash.com/photo-1589313002332-92e851e4bcb6?q=80&w=2159&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Buenos Aires"
           className="w-full h-full object-cover"
         />

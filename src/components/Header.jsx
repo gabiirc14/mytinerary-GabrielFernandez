@@ -8,7 +8,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
+
   const handleLike = () => {
     setIsLiked(!isLiked);
     // Aquí puedes agregar lógica adicional para manejar el "like"
@@ -34,7 +34,7 @@ const Header = () => {
               <Menu size={24} />
             </button>
             <div className="flex bg- items-center cursor-pointer" >
-              <User size={24} className="mr-2 "/>
+              <User size={24} className="mr-2 " />
               <p className="text-white font-bold">Login</p>
             </div>
           </div>
@@ -43,9 +43,8 @@ const Header = () => {
 
       {/* Menú deslizable */}
       <div
-        className={`fixed top-0 left-0 w-64 h-full bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 w-64 h-full bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
       >
         <div className="p-4">
           <button onClick={toggleMenu} className="text-white float-right">

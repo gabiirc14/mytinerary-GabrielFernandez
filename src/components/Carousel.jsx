@@ -74,9 +74,8 @@ const Carousel = () => {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`h-2 w-2 rounded-full mx-1 ${
-              currentSlide === index ? "bg-blue-500" : "bg-gray-300"
-            }`}
+            className={`h-2 w-2 rounded-full mx-1 ${currentSlide === index ? "bg-blue-500" : "bg-gray-300"
+              }`}
           />
         ))}
       </div>
