@@ -39,35 +39,36 @@ function Cities() {
   }, [searchTerm]);
 
   const CityCard = ({ city }) => (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl">
-      <div className="relative h-64 overflow-hidden">
-        <img
-          src={city.photo}
-          alt={city.name}
-          className="w-full h-full object-cover transform hover:scale-110 transition-all duration-500"
-        />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-          <h2 className="text-2xl font-bold text-white">{city.name}</h2>
-        </div>
-      </div>
-
-      <div className="p-4">
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-gray-600">
-            <span className="font-semibold">Population:</span>{' '}
-            {city.population?.toLocaleString() || 'No disponible'}
-          </p>
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-gray-200 flex flex-col">
+        <div className="relative h-64 overflow-hidden">
+            <img
+                src={city.photo}
+                alt={city.name}
+                className="w-full h-full object-cover transform hover:scale-110 transition-all duration-500"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                <h2 className="text-3xl font-extrabold text-white">{city.name}</h2>
+            </div>
         </div>
 
-        <button
-          onClick={() => navigate(`/city/${city._id}`)}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center space-x-2 font-medium"
-        >
-          View Details
-        </button>
-      </div>
+        <div className="flex-grow p-6 flex flex-col justify-between">
+            <div className="flex flex-col mb-4 space-y-2">
+                <p className="text-lg font-semibold">Población: <span className="font-normal">{city.population?.toLocaleString() || 'No disponible'}</span></p>
+                <p className="text-lg font-semibold">País: <span className="font-normal">{city.country}</span></p>
+                <p className="text-lg font-semibold">Continente: <span className="font-normal">{city.continent}</span></p>
+                <p className="text-lg font-semibold">Descripción: <span className="font-normal">{city.description}</span></p>
+            </div>
+
+            <button
+                onClick={() => navigate(`/city/${city._id}`)}
+                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center font-semibold text-lg shadow-md hover:shadow-lg"
+            >
+                Ver Detalles
+            </button>
+        </div>
     </div>
-  );
+);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-700 via-gray-400 to-blue-900">
