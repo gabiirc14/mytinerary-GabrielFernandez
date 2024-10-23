@@ -15,12 +15,7 @@ function Cities() {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`http://localhost:8080/api/cities?name=${search}`, {
-        headers: {
-          'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache'
-        }
-      });
+      const response = await axios.get(`http://localhost:8080/api/cities?name=${search}`, {});
       const citiesData = response.data.response;
       setCities(Array.isArray(citiesData) ? citiesData : []);
     } catch (error) {
@@ -38,47 +33,70 @@ function Cities() {
     return () => clearTimeout(debounceTimer);
   }, [searchTerm]);
 
-  const CityCard = ({ city }) => (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl border border-gray-200 flex flex-col">
-        <div className="relative h-64 overflow-hidden">
-            <img
-                src={city.photo}
-                alt={city.name}
-                className="w-full h-full object-cover transform hover:scale-110 transition-all duration-500"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+  const CityCard = ({ city }) => {
+    const navigate = useNavigate();
+
+    const handleNavigateToDetails = () => {
+      navigate(`/city/${city._id}`, {
+        state: {
+          cityImage: city.photo,
+          cityName: city.name,
+        },
+      });
+    };
+
+    return (
+      <div className="relative rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl max-w-md w-full mx-auto">
+        <div className="relative h-[500px]">
+          <img
+            src={city.photo}
+            alt={city.name}
+            className="absolute inset-0 w-full h-full object-cover transform hover:scale-110 transition-all duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+            <div className="absolute bottom-0 left-0 right-0 p-6 space-y-4">
+              <div className="space-y-2">
                 <h2 className="text-3xl font-extrabold text-white">{city.name}</h2>
+                <h3 className="text-xl font-bold text-white/90">{city.country}</h3>
+              </div>
+              <button
+                onClick={handleNavigateToDetails}
+                className="group relative w-full overflow-hidden rounded-lg bg-transparent px-4 py-3 border border-white/30 backdrop-blur-sm transition-all duration-300"
+              >
+                <div className="absolute inset-0 w-0 bg-white/20 transition-all duration-300 ease-out group-hover:w-full"></div>
+                <div className="relative flex items-center justify-center gap-2">
+                  <span className="font-medium text-white text-lg tracking-wider">
+                    EXPLORE DETAILS
+                  </span>
+                  <svg
+                    className="w-5 h-5 text-white transform transition-transform duration-300 ease-in-out group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </div>
+              </button>
             </div>
+          </div>
         </div>
-
-        <div className="flex-grow p-6 flex flex-col justify-between">
-            <div className="flex flex-col mb-4 space-y-2">
-                <p className="text-lg font-semibold">Población: <span className="font-normal">{city.population?.toLocaleString() || 'No disponible'}</span></p>
-                <p className="text-lg font-semibold">País: <span className="font-normal">{city.country}</span></p>
-                <p className="text-lg font-semibold">Continente: <span className="font-normal">{city.continent}</span></p>
-                <p className="text-lg font-semibold">Descripción: <span className="font-normal">{city.description}</span></p>
-            </div>
-
-            <button
-                onClick={() => navigate(`/city/${city._id}`)}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center font-semibold text-lg shadow-md hover:shadow-lg"
-            >
-                Ver Detalles
-            </button>
-        </div>
-    </div>
-);
-
+      </div>
+    );
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-700 via-gray-400 to-blue-900">
+    <div className="min-h-screen bg-gray-900">
       <BannerCity />
-
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-5xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-        Discover your ideal city
+          Discover your ideal city
         </h1>
-
         <div className="max-w-xl mx-auto mb-8 relative">
           <div className="relative">
             <input
@@ -86,38 +104,31 @@ function Cities() {
               placeholder="Buscar ciudad..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+              className="w-full text-black px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
             />
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
           </div>
         </div>
-
-        {error && (
-          <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-8 rounded">
-            <p>{error}</p>
-          </div>
-        )}
 
         {loading ? (
           <div className="flex justify-center items-center py-12">
             <Loader2 className="animate-spin text-blue-600" size={48} />
           </div>
         ) : cities.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className={`flex flex-wrap justify-center gap-6`}>
             {cities.map((city) => (
               <CityCard key={city._id} city={city} />
             ))}
           </div>
         ) : (
           <div className="text-center py-12">
-  <p className="text-lg md:text-xl text-white">
-    The city 
-    <strong className="bg-orange-500 text-white px-1 rounded">{searchTerm}</strong> 
-    was not found. Soon, you'll be able to add your favorite city!
-    We are <strong className="text-black">working</strong> hard for you.
-  </p>
-</div>
-
+            <p className="text-lg md:text-xl text-white">
+              The city
+              <strong className="bg-orange-500 text-white px-1 rounded">{searchTerm}</strong>
+              was not found. Soon, you'll be able to add your favorite city!
+              We are <strong className="text-black">working</strong> hard for you.
+            </p>
+          </div>
         )}
       </div>
     </div>
