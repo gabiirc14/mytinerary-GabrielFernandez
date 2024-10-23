@@ -11,7 +11,6 @@ const Header = () => {
 
   const handleLike = () => {
     setIsLiked(!isLiked);
-    // Aquí puedes agregar lógica adicional para manejar el "like"
   };
 
   const goToHome = () => {
@@ -75,8 +74,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Overlay */}
-      {isMenuOpen && (
+        {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40"
           onClick={toggleMenu}

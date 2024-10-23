@@ -13,7 +13,6 @@ function Details() {
 
   return (
     <div className="relative min-h-screen w-full bg-gray-900 flex items-center justify-center px-4">
-      {/* Imagen centrada y más grande */}
       <div className="flex flex-col items-center justify-center text-center space-y-8">
         {cityImage && (
           <img
@@ -27,7 +26,6 @@ function Details() {
           {cityName || 'Your Destination'}
         </h1>
 
-        {/* Botón elegante para regresar a las ciudades */}
         <button
           onClick={handleCities}
           className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-lg font-semibold rounded-full shadow-md hover:shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 ease-in-out transform hover:scale-105"
@@ -36,7 +34,6 @@ function Details() {
           <span>Back to Cities</span>
         </button>
 
-        {/* Mensaje de que la página está en proceso */}
         <div className="bg-white/10 p-6 rounded-lg shadow-md backdrop-blur-md border border-white/20 w-full max-w-xl">
           <div className="flex items-center gap-4">
             <Loader className="w-10 h-10 text-blue-400 animate-spin" />
