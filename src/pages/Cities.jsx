@@ -1,37 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import BannerCity from '../components/BannerCity';
+import { fetchCities, setSearchTerm } from '../store/reducers/cityReducer.js'; 
+import BannerCity from '../components/BannerCity.jsx';
 import { Search, Loader2 } from 'lucide-react';
 
 function Cities() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [cities, setCities] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchCities = async (search) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(`http://localhost:8080/api/cities?name=${search}`, {});
-      const citiesData = response.data.response;
-      setCities(Array.isArray(citiesData) ? citiesData : []);
-    } catch (error) {
-      setError(error.message || "Error al cargar las ciudades");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Usar useSelector para acceder a las ciudades, loading, error y searchTerm desde el store
+  const { cities, loading, error, searchTerm } = useSelector((state) => state.cities);
 
+  // Actualiza las ciudades cada vez que cambia searchTerm
   useEffect(() => {
-    const debounceTimer = setTimeout(() => {
-      fetchCities(searchTerm);
-    }, 300);
-
-    return () => clearTimeout(debounceTimer);
-  }, [searchTerm]);
+    dispatch(fetchCities(searchTerm));
+  }, [dispatch, searchTerm]);
 
   const CityCard = ({ city }) => {
     const navigate = useNavigate();
@@ -103,7 +87,7 @@ function Cities() {
               type="text"
               placeholder="Buscar ciudad..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => dispatch(setSearchTerm(e.target.value))}
               className="w-full text-black px-4 py-3 pl-12 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
             />
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
