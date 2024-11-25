@@ -5,6 +5,9 @@ export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const GOOGLE_LOGIN_START = "GOOGLE_LOGIN_START";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_ERROR = "LOGOUT_ERROR";
+
 
 // URL base
 const BASE_URL = 'http://localhost:8080/api/auth';
@@ -94,12 +97,40 @@ export const handleGoogleResponse = () => {
 export const LOGOUT = "LOGOUT";
 
 export const logout = () => {
-    return (dispatch) => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        dispatch({ type: LOGOUT });
-        window.location.href = '/signin';
+    return async (dispatch) => {
+        try {
+            const token = localStorage.getItem('token');
+            
+            // Llamada al endpoint de logout
+            const response = await axios.post(`${BASE_URL}/signout`, {}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.data.success) {
+                // Limpiar localStorage
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                
+                // Dispatch del logout
+                dispatch({ type: LOGOUT_SUCCESS });
+                
+                // Redirección
+                window.location.href = '/signin';
+            }
+        } catch (error) {
+            console.error('Error en logout:', error);
+            dispatch({
+                type: LOGOUT_ERROR,
+                payload: error.response?.data?.message || 'Logout failed'
+            });
+            
+            // Aún así, limpiamos el localStorage y hacemos logout local
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            dispatch({ type: LOGOUT });
+            window.location.href = '/signin';
+        }
     };
 };
-
-

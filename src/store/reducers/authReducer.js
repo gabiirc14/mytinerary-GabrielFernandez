@@ -1,5 +1,5 @@
 // store/reducers/authReducer.js
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, GOOGLE_LOGIN_START,LOGOUT } from '../actions/authActions.js';
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, GOOGLE_LOGIN_START,LOGOUT,LOGOUT_SUCCESS,LOGOUT_ERROR  } from '../actions/authActions.js';
 
 const initialState = {
     user: JSON.parse(localStorage.getItem('user')) || null,
@@ -27,12 +27,26 @@ const authReducer = (state = initialState, action) => {
                 loading: false,
                 error: null
             };
+
+        case LOGOUT_SUCCESS:
         case LOGOUT:
             return {
                 ...initialState,
                 user: null,
                 token: null,
-                isAuthenticated: false
+                isAuthenticated: false,
+                loading: false,
+                error: null
+            };
+
+        case LOGOUT_ERROR:
+            return {
+                ...initialState,
+                user: null,
+                token: null,
+                isAuthenticated: false,
+                loading: false,
+                error: action.payload
             };
 
         case LOGIN_ERROR:
