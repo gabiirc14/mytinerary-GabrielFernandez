@@ -12,7 +12,6 @@ function Details() {
   const [expandedItems, setExpandedItems] = useState({});
   const { itineraries = [], loading = false } = useSelector(state => state.itineraries || {});
 
-
   useEffect(() => {
     if (cityName) {
       dispatch(getItinerariesByCity(cityName));
@@ -38,6 +37,7 @@ function Details() {
       />
     ));
   };
+
   return (
     <div className="relative min-h-screen w-full bg-gray-900 flex flex-col items-center px-4 py-8">
       <div className="flex flex-col items-center justify-center text-center space-y-8 mb-12">
@@ -146,114 +146,125 @@ function Details() {
                 />
               </svg>
             </div>
-            <div className="space-y-2">
-              <h3 className="text-2xl font-bold text-white">
-                Adventures Coming Soon to {cityName}
-              </h3>
-              <p className="text-white/80">
-                Our local guides are crafting incredible experiences for this destination.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-white/10">
-              <p className="text-sm text-blue-400">
-                Stay tuned for upcoming itineraries and be among the first to explore!
-              </p>
-            </div>
           </div>
         </div>
       ) : (
         <div className="grid gap-6 w-full max-w-4xl">
           {itineraries.map((itinerary, index) => (
             <div key={itinerary._id || index} className="bg-white/10 p-6 rounded-lg backdrop-blur-md transition-all hover:bg-white/15">
-              <div className="flex items-center gap-4 mb-6">
-                <img
-                  src={itinerary.author.photo || `https://i.pravatar.cc/150?img=${index + 1}`}
-                  alt={itinerary.author.name}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-blue-400"
-                />
-                <h3 className="text-white text-xl font-semibold">{itinerary.author.name}</h3>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4 text-white mb-6">
-                <div className="flex items-center justify-center p-3 bg-white/5 rounded-lg">
-                  <div className="flex">{renderPriceIcons(itinerary.price)}</div>
-                </div>
-                <div className="flex items-center justify-center gap-2 p-3 bg-white/5 rounded-lg">
-                  <Clock className="w-6 h-6 text-blue-400" />
-                  <span className="text-lg">{itinerary.duration}h</span>
-                </div>
-                <div className="flex items-center justify-center gap-2 p-3 bg-white/5 rounded-lg">
-                  <Heart className="w-6 h-6 text-rose-400" />
-                  <span className="text-lg">{itinerary.likes}</span>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-6">
-                {itinerary.hashtags?.map((tag, idx) => (
-                  <span key={idx} className="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <button
-                onClick={() => handleViewMore(itinerary._id)}
-                className="w-full flex items-center justify-center gap-2 py-3 bg-white/20 rounded-lg text-white hover:bg-white/30 transition-colors"
-              >
-                <span>{expandedItems[itinerary._id] ? 'View Less' : 'View More'}</span>
-                {expandedItems[itinerary._id] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-              </button>
-
-              {expandedItems[itinerary._id] && (
-                <div className="mt-4 p-6 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-lg text-white border border-white/10 backdrop-blur-sm animate-fadeIn">
-                  <div className="space-y-4">
-                    <div className="flex justify-center">
-                      <div className="bg-blue-500/20 p-3 rounded-full">
-                        <svg
-                          className="w-8 h-8 text-blue-400"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 10V3L4 14h7v7l9-11h-7z"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-
-                    <div className="text-center space-y-2">
-                      <h4 className="text-xl font-semibold text-blue-300">
-                        Exciting Activities Coming Soon!
-                      </h4>
-                      <p className="text-white/80">
-                        We're preparing an amazing collection of activities for this itinerary.
-                      </p>
-                    </div>
-
-                    <div className="flex justify-center gap-4 text-sm text-white/60">
-                      <span className="flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Coming Soon
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Stay Tuned
-                      </span>
-                    </div>
-                    <div className="w-full bg-white/10 rounded-full h-1.5 mt-4">
-                      <div className="bg-blue-500 h-1.5 rounded-full w-3/4 animate-pulse"></div>
+              <div className="flex flex-col gap-4">
+                {/* Información del autor y título */}
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={itinerary.author.photo || `https://i.pravatar.cc/150?img=${index + 1}`}
+                      alt={itinerary.author.name}
+                      className="w-16 h-16 rounded-full object-cover border-2 border-blue-400"
+                    />
+                    <div className="flex flex-col">
+                      <span className="text-white/70 text-sm">Created by:</span>
+                      <h3 className="text-white text-xl font-semibold">{itinerary.author.name}</h3>
                     </div>
                   </div>
                 </div>
-              )}
+                <div className="text-center">
+                  <p className="text-blue-400 text-lg font-medium">{itinerary.author.title}</p>
+                </div>
+                <div className="w-full">
+                  <img
+                    src={itinerary.image}
+                    alt="Place"
+                    className="w-full h-[300px] object-cover rounded-lg shadow-lg hover:scale-[1.02] transition-transform duration-300"
+                  />
+                </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-4 text-white">
+                  <div className="flex items-center justify-center p-3 bg-white/5 rounded-lg">
+                    <div className="flex">{renderPriceIcons(itinerary.price)}</div>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 p-3 bg-white/5 rounded-lg">
+                    <Clock className="w-6 h-6 text-blue-400" />
+                    <span className="text-lg">{itinerary.duration}h</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2 p-3 bg-white/5 rounded-lg">
+                    <Heart className="w-6 h-6 text-rose-400" />
+                    <span className="text-lg">{itinerary.likes}</span>
+                  </div>
+                </div>
+
+                {/* Hashtags */}
+                <div className="flex flex-wrap gap-2">
+                  {itinerary.hashtags?.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="bg-blue-500/20 text-blue-300 px-4 py-1.5 rounded-full text-sm font-medium"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* View More button */}
+                <button
+                  onClick={() => handleViewMore(itinerary._id)}
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-white/20 rounded-lg text-white hover:bg-white/30 transition-colors"
+                >
+                  <span>{expandedItems[itinerary._id] ? 'View Less' : 'View More'}</span>
+                  {expandedItems[itinerary._id] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                </button>
+
+                {expandedItems[itinerary._id] && (
+                  <div className="mt-4 p-6 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-blue-500/10 rounded-lg text-white border border-white/10 backdrop-blur-sm animate-fadeIn">
+                    <div className="space-y-4">
+                      <div className="flex justify-center">
+                        <div className="bg-blue-500/20 p-3 rounded-full">
+                          <svg
+                            className="w-8 h-8 text-blue-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M13 10V3L4 14h7v7l9-11h-7z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+
+                      <div className="text-center space-y-2">
+                        <h4 className="text-xl font-semibold text-blue-300">
+                          Exciting Activities Coming Soon!
+                        </h4>
+                        <p className="text-white/80">
+                          We're preparing an amazing collection of activities for this itinerary.
+                        </p>
+                      </div>
+
+                      <div className="flex justify-center gap-4 text-sm text-white/60">
+                        <span className="flex items-center gap-1">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          Coming Soon
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          Stay Tuned
+                        </span>
+                      </div>
+                      <div className="w-full bg-white/10 rounded-full h-1.5 mt-4">
+                        <div className="bg-blue-500 h-1.5 rounded-full w-3/4 animate-pulse"></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
