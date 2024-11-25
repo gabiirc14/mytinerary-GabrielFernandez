@@ -146,9 +146,22 @@ function Details() {
                 />
               </svg>
             </div>
+            <div className="space-y-2">
+              <h3 className="text-2xl font-bold text-white">
+                Adventures Coming Soon to {cityName}
+              </h3>
+              <p className="text-white/80">
+                Our local guides are crafting incredible experiences for this destination.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-white/10">
+              <p className="text-sm text-blue-400">
+                Stay tuned for upcoming itineraries and be among the first to explore!
+              </p>
+            </div>
           </div>
         </div>
-      ) : (
+      ): (
         <div className="grid gap-6 w-full max-w-4xl">
           {itineraries.map((itinerary, index) => (
             <div key={itinerary._id || index} className="bg-white/10 p-6 rounded-lg backdrop-blur-md transition-all hover:bg-white/15">
